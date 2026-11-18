@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using System.Globalization;
 using System.Linq;
 using Test_Taste_Console_Application.Constants;
 using Test_Taste_Console_Application.Domain.Objects;
@@ -97,6 +98,46 @@ namespace Test_Taste_Console_Application.Domain.Services
                     --------------------+------------------------------------------------------------------------
                 */
             }
+        }
+
+        public void OutputAllPlanetsAndTheirAverageMoonTemperatureToConsole()
+        {
+            Console.WriteLine(OutputString.LoadingData);
+            var planets = _planetService.GetAllPlanets().Where(planet => planet.HasMoons()).ToArray();
+
+            //Only planets with at least one moon are listed.
+            if (!planets.Any())
+            {
+                Console.WriteLine(OutputString.NoPlanetsWithMoonsFound);
+                return;
+            }
+
+            Console.WriteLine(OutputString.WritingScreen);
+            var columnSizes = new[] { 20, 25, 20, 20 };
+            var columnLabels = new[]
+            {
+                OutputString.PlanetId, OutputString.MoonsWithTemperature,
+                OutputString.PlanetMoonAverageTemperatureKelvin, OutputString.PlanetMoonAverageTemperatureCelsius
+            };
+
+            ConsoleWriter.CreateHeader(columnLabels, columnSizes);
+
+            foreach (var planet in planets)
+            {
+                var kelvin = planet.AverageMoonTemperature;
+                ConsoleWriter.CreateText(
+                    new[]
+                    {
+                        CultureInfoUtility.TextInfo.ToTitleCase(planet.Id),
+                        $"{planet.MoonsWithTemperatureCount} of {planet.Moons.Count}",
+                        kelvin.HasValue ? kelvin.Value.ToString("F1", CultureInfo.InvariantCulture) : OutputString.NoTemperatureData,
+                        kelvin.HasValue ? (kelvin.Value - 273.15f).ToString("F1", CultureInfo.InvariantCulture) : OutputString.NoTemperatureData
+                    },
+                    columnSizes);
+            }
+
+            ConsoleWriter.CreateLine(columnSizes);
+            ConsoleWriter.CreateEmptyLines(2);
         }
 
         public void OutputAllMoonsAndTheirMassToConsole()

@@ -1,4 +1,4 @@
-﻿namespace Test_Taste_Console_Application.Constants
+namespace Test_Taste_Console_Application.Constants
 {
     public class OutputString
     {
@@ -11,6 +11,15 @@
         public const string MoonMassExponent = "Moon's Mass Exponent";
         public const string MoonMassValue = "Moon's Mass Value";
         public const string PlanetMoonAverageGravity = "The Planet's Average Moon Gravity";
+        public const string PlanetMoonAverageTemperatureKelvin = "Avg Moon Temp (K)";
+        public const string PlanetMoonAverageTemperatureCelsius = "Avg Moon Temp (°C)";
+        public const string MoonsWithTemperature = "Moons with temp data";
+        public const string NoTemperatureData = "n/a";
+        public const string NoPlanetsWithMoonsFound = "No planets with moons found.";
+        public const string LoadingData = "Loading data from the Solar System API...";
+        public const string WritingScreen = "Writing data to the screen...";
+        public const string WritingFile = "Writing data to file...";
+        public const string Done = "Done.";
         public const string NoMoonsFound = "No moons found.";
         public const string NoPlanetsFound = "No planets found.";
         public const string FileCreated = "The file is created in: ";
