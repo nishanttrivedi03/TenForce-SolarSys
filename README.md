@@ -39,6 +39,6 @@ on screen and in `FileOutput/AllPlanetsAndTheirAverageMoonTemperature.csv`.
 | `PlanetService` caches its result | Every call previously re-did one HTTP request per moon; with several outputs that multiplies. Now it is loaded once. A failing moon request is logged and skipped. |
 | `IOutputService.OutputAllPlanetsAndTheirAverageMoonTemperatureToConsole`, new `IFileOutputService` / `FileOutputService` | Screen and file output are separate responsibilities (data access → domain objects → output). Existing interface methods are unchanged, so nothing existing breaks. |
 | `Program.cs` | Fixed a compile error (`$""..""`), moved service resolution inside `try`, added progress messages ("Loading data…", "Writing data…"). |
-| `net5.0` → `net8.0`, packages updated | net5.0 is end-of-life. |
+| `net5.0` → `net10.0`, packages updated | net5.0 is end-of-life. |
 
 Temperatures are shown in Kelvin (API unit) and °C.
